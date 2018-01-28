@@ -89,6 +89,14 @@ public class FeedPresenterTest {
         verify(view).showImages(anyList());
         verify(view).dismissProgressDialog();
 
+        reset(view, service);
+        when(service.getImageList(any())).thenReturn(Single.just(fakeResponse));
+
+        presenter.onSearch("cat dog");
+        verify(view).showProgressDialog();
+        verify(service).getImageList("cat,dog");
+        verify(view).showImages(anyList());
+        verify(view).dismissProgressDialog();
     }
 
     @Test

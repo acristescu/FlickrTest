@@ -48,7 +48,8 @@ public class FeedPresenter extends BasePresenter implements FeedContract.Present
     public void onSearch(CharSequence query) {
         view.closeSearchBox();
         view.setSubTitle(query.toString());
-        unsubscribe(); // make sure we're cancelling any previous searches;
+        unsubscribe(); // make sure we're cancelling any previous searches
+        imageListResponse = null;
         tags = query.toString().replaceAll("\\s+", ",");
         fetchImages(tags);
     }
